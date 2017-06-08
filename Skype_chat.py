@@ -1,0 +1,33 @@
+import Skype4Py
+from playsound import playsound
+import time
+def play_sound():
+    playsound('alarmclock.mp3')
+    playsound('beepclocka.mp3')
+
+
+def func_check():
+    skype = Skype4Py.Skype()
+    skype.Attach()
+
+    user_status = skype.CurrentUserStatus  # returns a string
+    missed_messages = skype.MissedMessages  # object type=message collection
+    missed_calls = skype.MissedCalls  # object type=call collection
+
+    print 'user_status:', user_status
+    if user_status != 'ONLINE':
+        playsound('beep-01a.mp3')
+
+    for list in missed_messages:
+        print 'missed_messages:', list
+        play_sound()
+    for list in missed_calls:
+        print 'missed_calls:', list
+        play_sound()
+
+# Play sound
+
+if __name__ == '__main__':
+    while True:
+        func_check()
+        time.sleep(1)

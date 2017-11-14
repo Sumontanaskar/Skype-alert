@@ -1,9 +1,17 @@
 import Skype4Py
 from playsound import playsound
 import time
+import psutil
+
 def play_sound():
     playsound('alarmclock.mp3')
     playsound('beepclocka.mp3')
+def Powercheck():
+    battery = psutil.sensors_battery()
+    print battery
+    if battery.percent < 75:
+        print "Battary percentage low"
+        play_sound()
 
 
 def func_check():
@@ -16,7 +24,8 @@ def func_check():
 
     print 'user_status:', user_status
     if user_status != 'ONLINE':
-        playsound('beep-01a.mp3')
+        #playsound('beep-01a.mp3')
+        pass
 
     for list in missed_messages:
         print 'missed_messages:', list
@@ -30,4 +39,5 @@ def func_check():
 if __name__ == '__main__':
     while True:
         func_check()
-        time.sleep(1)
+        Powercheck()
+        time.sleep(10)

@@ -9,7 +9,7 @@ def play_sound():
 def Powercheck():
     battery = psutil.sensors_battery()
     print battery
-    if battery.percent < 75:
+    if battery.percent < 15:
         print "Battary percentage low"
         play_sound()
 
